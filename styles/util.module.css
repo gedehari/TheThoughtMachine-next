@@ -1,0 +1,38 @@
+div.contentDiv {
+    margin: auto;
+    max-width: 600px;
+}
+
+.title {
+    text-align: center;
+}
+
+.button {
+    display: inline-block;
+
+    color: black;
+    background-color: white;
+    text-decoration: none;
+    text-align: center;
+    font-size: 1em;
+
+    border: 1px solid;
+    border-radius: 12px;
+
+    padding: 10px;
+
+    cursor: pointer;
+
+    transition-duration: 200ms;
+}
+
+.button:hover:not(:disabled) {
+    color: white;
+    background-color: black;
+}
+
+.button:disabled {
+    color: gray;
+    border-color: gray;
+    cursor: not-allowed;
+}

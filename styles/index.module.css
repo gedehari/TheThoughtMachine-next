@@ -1,12 +1,3 @@
-div.contentDiv {
-  margin: auto;
-  max-width: 600px;
-}
-
-.titleTemp {
-  text-align: center;
-}
-
 div.postList div.postRow {
   border: 1px solid rgba(1.0, 1.0, 1.0, 0.6);
   border-radius: 12px;
@@ -29,6 +20,16 @@ div.postList div.postRow .postDate {
   color: rgba(1.0, 1.0, 1.0, 0.5);
 }
 
-div.postList div.postRow .postContent {
-  margin: 0
+div.postList div.postRow .postContent * {
+  margin: 5px 0
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-start;
+  margin: 7px 0;
+}
+
+.buttonContainer * {
+  margin: 5px;
 }

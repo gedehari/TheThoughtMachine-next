@@ -33,3 +33,9 @@ div.postList div.postRow .postContent * {
 .buttonContainer * {
   margin: 5px;
 }
+
+@media only screen and (max-width: 620px) {
+  div.postList div.postRow {
+    padding: 12px;
+  }
+}

@@ -1,0 +1,20 @@
+.alert {
+    border: 2px solid rgba(1.0, 1.0, 1.0, 0.6);
+    border-radius: 8px;
+    padding: 8px;
+    margin: 10px 0;
+
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
+}
+
+.alert * {
+    margin: 0;
+}
+
+.alertError {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;    
+}

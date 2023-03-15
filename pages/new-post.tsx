@@ -4,17 +4,27 @@ import { ReactNode, useEffect, useRef, useState } from "react"
 
 import styles from "@/styles/new-post.module.css"
 import utilStyles from "@/styles/util.module.css"
-import { uploadThought } from "@/lib/thought"
+import Alert from "@/components/alert"
 
 export default function NewPost() {
-  const [disabledState, setDisabledState] = useState(false)
+  const [state, setState] = useState<{
+    disabled?: boolean,
+    error?: string 
+  }>({
+    disabled: false,
+    error: ""
+  })
 
   const titleInputRef = useRef<HTMLInputElement>(null)
   const messageInputRef = useRef<HTMLTextAreaElement>(null)
 
+  const alertRef = useRef<Alert>(null)
+
   function post() {
     if (titleInputRef.current?.value && messageInputRef.current?.value) {
-      setDisabledState(true)
+      setState({disabled: true})
+      alertRef.current?.setVisible(false)
+
       fetch("/api/post", {
         method: "POST",
         headers: {
@@ -30,14 +40,19 @@ export default function NewPost() {
           Router.push("/")
         }
         else {
-          setDisabledState(false)
+          console.log(value)
+          value.json().then((value) => {
+            setState({disabled: false, error: value.error})
+            alertRef.current?.setVisible(true)
+          })
         }
       })
     }
   }
 
   function back() {
-    setDisabledState(true)
+    setState({disabled: true})
+    alertRef.current?.setVisible(false)
     Router.push("/")
   }
 
@@ -48,19 +63,22 @@ export default function NewPost() {
           <h1 className={utilStyles.title}>Add Thought</h1>
         </footer>
         <main>
-          <button className={utilStyles.button} disabled={disabledState} onClick={back}>&larr; Back</button>
-          <form className={styles.newPostForm}>
-            <div className={styles.formGroup}>
+          <button className={utilStyles.button} disabled={state.disabled} onClick={back}>&larr; Back</button>
+          <Alert type="error" visible={false} ref={alertRef}>
+            {`Error: ${state.error}`}
+          </Alert>
+          <form className={utilStyles.form}>
+            <div className={utilStyles.formGroup}>
               <label>Title</label>
-              <input ref={titleInputRef} type="text" disabled={disabledState} />
+              <input ref={titleInputRef} type="text" disabled={state.disabled} />
             </div>
-            <div className={styles.formGroup}>
+            <div className={utilStyles.formGroup}>
               <label>Message</label>
               <p>(Markdown is supported)</p>
-              <textarea ref={messageInputRef} disabled={disabledState} />
+              <textarea ref={messageInputRef} disabled={state.disabled} />
             </div>
           </form>
-          <button className={utilStyles.button} disabled={disabledState} onClick={post}>Post!</button>
+          <button className={utilStyles.button} disabled={state.disabled} onClick={post}>Post!</button>
         </main>
       </div>
     </>

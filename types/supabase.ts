@@ -15,6 +15,7 @@ export interface Database {
           created_at: string
           from_owner: boolean
           id: number
+          password: string
           title: string
         }
         Insert: {
@@ -22,6 +23,7 @@ export interface Database {
           created_at?: string
           from_owner?: boolean
           id?: number
+          password?: string
           title: string
         }
         Update: {
@@ -29,6 +31,7 @@ export interface Database {
           created_at?: string
           from_owner?: boolean
           id?: number
+          password?: string
           title?: string
         }
       }
@@ -37,7 +40,12 @@ export interface Database {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      random_string: {
+        Args: {
+          length: number
+        }
+        Returns: string
+      }
     }
     Enums: {
       [_ in never]: never

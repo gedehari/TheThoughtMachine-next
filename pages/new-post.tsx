@@ -9,7 +9,7 @@ import Alert from "@/components/alert"
 export default function NewPost() {
   const [state, setState] = useState<{
     disabled?: boolean,
-    error?: string 
+    error?: string
   }>({
     disabled: false,
     error: ""
@@ -21,8 +21,17 @@ export default function NewPost() {
   const alertRef = useRef<Alert>(null)
 
   function post() {
+    if (!titleInputRef.current?.value) {
+      setState({ disabled: false, error: "Title is empty!" })
+      alertRef.current?.setVisible(true)
+    }
+    else if (!messageInputRef.current?.value) {
+      setState({ disabled: false, error: "Message is empty!" })
+      alertRef.current?.setVisible(true)
+    }
+
     if (titleInputRef.current?.value && messageInputRef.current?.value) {
-      setState({disabled: true})
+      setState({ disabled: true })
       alertRef.current?.setVisible(false)
 
       fetch("/api/post", {
@@ -35,23 +44,23 @@ export default function NewPost() {
           message: messageInputRef.current?.value
         })
       })
-      .then((value) => {
-        if (value.ok) {
-          Router.push("/")
-        }
-        else {
-          console.log(value)
-          value.json().then((value) => {
-            setState({disabled: false, error: value.error})
-            alertRef.current?.setVisible(true)
-          })
-        }
-      })
+        .then((value) => {
+          if (value.ok) {
+            Router.push("/")
+          }
+          else {
+            console.log(value)
+            value.json().then((value) => {
+              setState({ disabled: false, error: value.error })
+              alertRef.current?.setVisible(true)
+            })
+          }
+        })
     }
   }
 
   function back() {
-    setState({disabled: true})
+    setState({ disabled: true })
     alertRef.current?.setVisible(false)
     Router.push("/")
   }

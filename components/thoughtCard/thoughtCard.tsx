@@ -9,7 +9,7 @@ export default function ThoughtCard({ thought }: { thought: ThoughtData }) {
   return (
     <div className={`${styles.thoughtCard} ${thought.fromOwner ? styles.thoughtFromOwner : ""}`} key={thought.id}>
       <h1 className={styles.thoughtTitle}>{thought.title}</h1>
-      <h3 className={styles.thoughtDate}>{(thought.createdAt as Date).toLocaleString("en", { dateStyle: "full" })}</h3>
+      <h3 className={styles.thoughtDate}>{(thought.createdAt as Date).toLocaleString("en", { dateStyle: "full", timeStyle: "medium" })}</h3>
       <ReactMarkdown className={styles.thoughtContent}>
         {thought.content}
       </ReactMarkdown>

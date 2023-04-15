@@ -1,6 +1,6 @@
 import { supabase } from "./supabaseClient"
 
-export interface Thought {
+export interface ThoughtData {
   id?: number
   title: string
   content: string
@@ -13,8 +13,8 @@ interface GetThoughtsProps {
   limit?: number
 }
 
-export function getThoughts({ from, limit }: GetThoughtsProps): Promise<Array<Thought>> {
-  return new Promise<Array<Thought>>((resolve, reject) => {
+export function getThoughts({ from, limit }: GetThoughtsProps): Promise<Array<ThoughtData>> {
+  return new Promise<Array<ThoughtData>>((resolve, reject) => {
     supabase.from("thoughts")
       .select()
       .order("id", { ascending: false })
@@ -37,7 +37,7 @@ export function getThoughts({ from, limit }: GetThoughtsProps): Promise<Array<Th
   })
 }
 
-export function uploadThought(thought: Thought) {
+export function uploadThought(thought: ThoughtData) {
   return supabase.from("thoughts").insert({
     title: thought.title,
     content: thought.content

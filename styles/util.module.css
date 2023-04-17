@@ -12,12 +12,14 @@ div.contentDiv {
 
     color: black;
     background-color: white;
+
     text-decoration: none;
     text-align: center;
     font-size: 1em;
 
     border: 1px solid;
     border-radius: 8px;
+    border-color: black;
 
     padding: 8px;
 
@@ -26,14 +28,14 @@ div.contentDiv {
     transition-duration: 200ms;
 }
 
-.button.redButton {
-    color: red;
-    border-color: red;
-}
-
 .button:hover:not(:disabled) {
     color: white;
     background-color: black;
+}
+
+.button.redButton {
+    color: red;
+    border-color: red;
 }
 
 .button.redButton:hover:not(:disabled) {
@@ -99,4 +101,8 @@ div.contentDiv {
 
 .form .formGroup {
     margin: 0 0 20px 0
+}
+
+.disabled {
+    opacity: 0.5;
 }

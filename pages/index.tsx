@@ -22,6 +22,8 @@ export async function getServerSideProps(): Promise<{ props: HomeProps }> {
 }
 
 export default function Home({ thoughts }: HomeProps) {
+  const [disabled, setDisabled] = useState(false)
+
   const [thoughtsData, setThoughtsData] = useState(
     thoughts.map((thought) => {
       thought.createdAt = new Date(thought.createdAt as string)
@@ -32,7 +34,8 @@ export default function Home({ thoughts }: HomeProps) {
   const router = useRouter();
 
   function refresh() {
-    router.replace(router.asPath);
+    setDisabled(true)
+    router.replace("/");
   }
 
   return (
@@ -44,7 +47,7 @@ export default function Home({ thoughts }: HomeProps) {
         <footer>
           <h1 className={utilStyles.title}>The Thought Machine</h1>
         </footer>
-        <main>
+        <main className={`${disabled ? utilStyles.disabled : ""}`}>
           <div className={`${utilStyles.buttonContainer} ${styles.indexButtonContainer}`}>
             <Link href="/post" className={`${utilStyles.button}`}>
               <i className="bi bi-pencil-square" />

@@ -61,7 +61,7 @@ export default function NewPost() {
           <Alert type="error" visible={error ? true : false}>
             {`Error: ${error}`}
           </Alert>
-          <ThoughtForm onError={onError} onSubmit={onSubmit} />
+          <ThoughtForm disabled={disabled} onError={onError} onSubmit={onSubmit} />
         </main>
       </div>
     </>
